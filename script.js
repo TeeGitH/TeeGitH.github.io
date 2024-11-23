@@ -32,14 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the Word-Guessing-Game project card's Learn More button
     const wordGuessingGameLink = document.querySelector('.project-card:first-child .btn');
+    const llmTwinLink = document.querySelector('.project-card:nth-child(2) .btn');
     
-    async function loadMarkdownContent() {
+    async function loadMarkdownContent(markdownFile) {
         try {
-            const response = await fetch('readme_word_guessing_game.md');
+            const response = await fetch(`project_docs/${markdownFile}`);
             const text = await response.text();
             markdownContent.innerHTML = marked.parse(text);
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+            document.body.style.overflow = 'hidden';
         } catch (error) {
             console.error('Error loading markdown:', error);
         }
@@ -47,7 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     wordGuessingGameLink.addEventListener('click', (e) => {
         e.preventDefault();
-        loadMarkdownContent();
+        loadMarkdownContent('readme_word_guessing_game.md');
+    });
+
+    llmTwinLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadMarkdownContent('Building_LLMs_Twins.md');
     });
 
     // Close modal when clicking the close button

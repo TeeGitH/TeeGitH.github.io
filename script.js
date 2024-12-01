@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update the Word-Guessing-Game project card's Learn More button
     const wordGuessingGameLink = document.querySelector('.project-card:first-child .btn');
     const llmTwinLink = document.querySelector('.project-card:nth-child(2) .btn');
+    const personaFineTuningLink = document.querySelector('.project-card:nth-child(3) .btn');
     
     async function loadMarkdownContent(markdownFile) {
         try {
@@ -54,6 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
     llmTwinLink.addEventListener('click', (e) => {
         e.preventDefault();
         loadMarkdownContent('Building_LLMs_Twins.md');
+    });
+
+    personaFineTuningLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadMarkdownContent('persona_AI_FineTuning.md');
     });
 
     // Close modal when clicking the close button

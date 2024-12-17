@@ -163,6 +163,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 default:
                     break;
             }
+
+            // Scroll to the specified section
+            const sectionElement = document.getElementById(sectionParam);
+            if (sectionElement) {
+                sectionElement.scrollIntoView({ behavior: 'smooth' });
+            }
         }
     }
 

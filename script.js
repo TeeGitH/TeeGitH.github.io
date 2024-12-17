@@ -120,4 +120,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial arrow visibility check
     updateArrowVisibility();
+
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Function to display dynamic content based on URL parameter
+    function displayDynamicContent() {
+        const sectionParam = getUrlParameter('section'); // Example parameter
+        const dynamicContentDivs = {
+            home: document.getElementById('home-content'),
+            about: document.getElementById('about-content'),
+            projects: document.getElementById('projects-content'),
+            insights: document.getElementById('insights-content'),
+            journeys: document.getElementById('journeys-content'),
+            contact: document.getElementById('contact-content')
+        };
+
+        // Example content based on the 'section' parameter
+        if (sectionParam) {
+            switch (sectionParam) {
+                case 'home':
+                    dynamicContentDivs.home.innerHTML = '<p>Welcome to my personalized home section!</p>';
+                    break;
+                case 'about':
+                    dynamicContentDivs.about.innerHTML = '<p>Here is some special information about me!</p>';
+                    break;
+                case 'projects':
+                    dynamicContentDivs.projects.innerHTML = '<p>Check out my featured projects!</p>';
+                    break;
+                case 'insights':
+                    dynamicContentDivs.insights.innerHTML = '<p>Insights tailored for you!</p>';
+                    break;
+                case 'journeys':
+                    dynamicContentDivs.journeys.innerHTML = '<p>Explore my unique journeys!</p>';
+                    break;
+                case 'contact':
+                    dynamicContentDivs.contact.innerHTML = '<p>Contact me for personalized inquiries!</p>';
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    // Call the function to display content based on URL parameters
+    displayDynamicContent();
 });

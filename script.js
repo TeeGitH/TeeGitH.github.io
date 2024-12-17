@@ -83,4 +83,41 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'auto'; // Restore scrolling
         }
     });
+
+    // Journeys section scroll functionality
+    const journeysGrid = document.querySelector('.journeys-grid');
+    const leftArrow = document.querySelector('.scroll-arrow.left');
+    const rightArrow = document.querySelector('.scroll-arrow.right');
+
+    // Scroll amount for each arrow click (adjust as needed)
+    const scrollAmount = 300;
+
+    // Update arrow visibility
+    function updateArrowVisibility() {
+        leftArrow.classList.toggle('hidden', journeysGrid.scrollLeft <= 0);
+        rightArrow.classList.toggle('hidden', 
+            journeysGrid.scrollLeft + journeysGrid.clientWidth >= journeysGrid.scrollWidth);
+    }
+
+    // Add click handlers for arrows
+    leftArrow.addEventListener('click', () => {
+        journeysGrid.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    rightArrow.addEventListener('click', () => {
+        journeysGrid.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    // Update arrow visibility on scroll and resize
+    journeysGrid.addEventListener('scroll', updateArrowVisibility);
+    window.addEventListener('resize', updateArrowVisibility);
+
+    // Initial arrow visibility check
+    updateArrowVisibility();
 });

@@ -334,13 +334,37 @@ footer {
 }
 
 /* Journeys & Joys section */
+.journeys-container {
+    position: relative;
+    padding: 0 40px;
+}
+
 .journeys-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
     gap: 2rem;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #ddd;
+}
+
+.journeys-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.journeys-grid::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.journeys-grid::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
 }
 
 .journey-card {
+    flex: 0 0 300px;
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 5px;
@@ -367,4 +391,38 @@ footer {
     font-size: 1.1rem;
     color: var(--text-color);
     font-style: italic;
+}
+
+/* Navigation arrows */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.scroll-arrow:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.scroll-arrow.left {
+    left: 0;
+}
+
+.scroll-arrow.right {
+    right: 0;
+}
+
+.scroll-arrow.hidden {
+    display: none;
 }

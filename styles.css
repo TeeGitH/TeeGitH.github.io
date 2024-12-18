@@ -1,9 +1,30 @@
 /* Base styles */
 :root {
+    /* Light mode variables */
     --primary-color: #3498db;
     --secondary-color: #2c3e50;
     --text-color: #333;
     --background-color: #f4f4f4;
+    --card-background: #fff;
+    --nav-background: #3498db;
+    --nav-text: #fff;
+    --modal-background: #fefefe;
+    --modal-text: #333;
+    --border-color: #ddd;
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --primary-color: #4fa3e0;
+    --secondary-color: #34495e;
+    --text-color: #e0e0e0;
+    --background-color: #1a1a1a;
+    --card-background: #2d2d2d;
+    --nav-background: #2c3e50;
+    --nav-text: #fff;
+    --modal-background: #2d2d2d;
+    --modal-text: #e0e0e0;
+    --border-color: #404040;
 }
 
 * {
@@ -27,8 +48,8 @@ body {
 
 /* Header styles */
 header {
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: var(--nav-background);
+    color: var(--nav-text);
     padding: 1rem 0;
 }
 
@@ -141,7 +162,9 @@ h2 {
 }
 
 .project-card {
-    background-color: #fff;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
     padding: 1.5rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -159,7 +182,9 @@ h2 {
 }
 
 .blog-card {
-    background-color: #fff;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
     padding: 1.5rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -181,8 +206,10 @@ h2 {
 #contact-form textarea {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
+    background-color: var(--card-background);
+    color: var(--text-color);
 }
 
 #contact-form textarea {
@@ -192,7 +219,7 @@ h2 {
 /* Footer styles */
 footer {
     background-color: var(--secondary-color);
-    color: #fff;
+    color: var(--nav-text);
     padding: 1rem 0;
     text-align: center;
 }
@@ -259,7 +286,8 @@ footer {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--modal-background);
+    color: var(--modal-text);
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -365,7 +393,9 @@ footer {
 
 .journey-card {
     flex: 0 0 300px;
-    background-color: #fff;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
     padding: 1.5rem;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -425,4 +455,24 @@ footer {
 
 .scroll-arrow.hidden {
     display: none;
+}
+
+/* Style the theme toggle button */
+.theme-toggle {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--nav-text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
 }

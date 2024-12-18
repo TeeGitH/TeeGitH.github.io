@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
 
     // Toggle mobile menu
     menuToggle.addEventListener('click', () => {
@@ -15,14 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth'
             });
         });
-    });
-
-    // Form submission (you can replace this with your own logic)
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! I will get back to you soon.');
-        contactForm.reset();
     });
 
     // Add this new code for handling the markdown modal
@@ -174,4 +168,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call the function to display content based on URL parameters
     displayDynamicContent();
+
+    // Function to set theme
+    function setTheme(isDark) {
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('darkMode', isDark);
+    }
+
+    // Check for saved user preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('darkMode');
+    
+    // Set initial theme
+    if (savedTheme !== null) {
+        setTheme(savedTheme === 'true');
+    } else {
+        setTheme(prefersDark);
+    }
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        setTheme(!isDark);
+    });
 });

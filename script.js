@@ -177,15 +177,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Check for saved user preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     const savedTheme = localStorage.getItem('darkMode');
     
     // Set initial theme
     if (savedTheme !== null) {
         setTheme(savedTheme === 'true');
     } else {
-        setTheme(prefersDark);
+        setTheme(prefersDark.matches);
     }
+
+    // Listen for system theme changes
+    prefersDark.addEventListener('change', (e) => {
+        // Only update if user hasn't set a preference
+        if (localStorage.getItem('darkMode') === null) {
+            setTheme(e.matches);
+        }
+    });
 
     // Toggle theme on button click
     themeToggle.addEventListener('click', () => {

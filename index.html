@@ -7,6 +7,261 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/03c56a850b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Enhanced Journey Cards */
+        .journey-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .journey-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.85) 0%,
+                rgba(255, 255, 255, 0.85) 100%
+            );
+            z-index: 1;
+        }
+
+        .journey-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .journey-card:hover::before {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.75) 0%,
+                rgba(255, 255, 255, 0.75) 100%
+            );
+        }
+
+        .journey-card:hover::after {
+            opacity: 1;
+        }
+
+        .journey-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-card h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .journey-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .journey-card:hover h3::after {
+            width: 100px;
+        }
+
+        .journey-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .journey-card .btn {
+            background: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .journey-card .btn:hover {
+            background: #2980b9;
+            transform: translateX(5px);
+        }
+
+        /* Specific background images for each card */
+        .journey-card:nth-child(1) {
+            background-image: url('journeys-and-joys/images/rural-thailand/image2.jpg');
+        }
+        
+        .journey-card:nth-child(2) {
+            background-image: url('journeys-and-joys/images/yaowarat-drinks/image1.jpg');
+        }
+        
+        /* Remove background images for other cards but keep the styling */
+        .journey-card:nth-child(3),
+        .journey-card:nth-child(4),
+        .journey-card:nth-child(5) {
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+        }
+
+        /* Add new featured story label style */
+        .featured-story {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 20px 0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 165, 0, 0.2);
+        }
+
+        .featured-story:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+        }
+
+        .featured-story i {
+            margin-right: 8px;
+        }
+
+        /* Enhanced header with gradient */
+        header {
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+            color: var(--nav-text);
+            padding: 1rem 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhance nav links with hover effect */
+        #nav-links a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        #nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        #nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Enhanced hero section with gradient */
+        .hero {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 107%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+        }
+
+        /* Enhanced footer with gradient */
+        footer {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #fff;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 107%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+        }
+
+        footer .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Dark mode styles */
+        [data-theme="dark"] header {
+            background: linear-gradient(135deg, #4a1d96, #2d1b69);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .hero {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        [data-theme="dark"] footer {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        [data-theme="dark"] .hero::before,
+        [data-theme="dark"] footer::before {
+            background: radial-gradient(circle at 30% 107%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+
+        [data-theme="dark"] .featured-story {
+            background: linear-gradient(135deg, #c17d11, #a65d03);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .featured-story:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -39,6 +294,9 @@
                 <h2>Empowering Ideas Through Technology, AI, and Creativity</h2>
                 <div id="home-content" class="dynamic-content"></div>
                 <p>Welcome to my digital playground where technology meets creativity. I'm Tee Kumthorncharoen, but you can call me Tee.</p>
+                <a href="journeys-and-joys/entries/entry2.html" class="featured-story">
+                    <i class="fas fa-star"></i>Featured Story: A Refreshing Drink in Yaowarat
+                </a>
             </div>
         </section>
 
@@ -107,29 +365,29 @@
                     </button>
                     <div class="journeys-grid">
                         <div class="journey-card">
-                            <h3>Thai Culinary Journey</h3>
-                            <p>Exploring the vibrant flavors and cultural significance of Thai cuisine, from street food adventures to traditional family recipes.</p>
-                            <a href="journeys-and-joys/entries/entry1.html" class="btn">Learn More</a>
-                        </div>
-                        <div class="journey-card">
-                            <h3>Life in Bangkok</h3>
-                            <p>A personal perspective on living in the City of Angels - where tradition meets modernity in the heart of Thailand.</p>
-                            <a href="journeys-and-joys/entries/entry2.html" class="btn">Learn More</a>
-                        </div>
-                        <div class="journey-card">
                             <h3>Rural Thailand Tales</h3>
                             <p>Stories from Thailand's countryside, exploring the natural beauty, local wisdom, and peaceful way of life.</p>
-                            <a href="journeys-and-joys/entries/entry3.html" class="btn">Learn More</a>
+                            <a href="journeys-and-joys/entries/entry1.html" class="btn">Explore</a>
+                        </div>
+                        <div class="journey-card">
+                            <h3>A Refreshing Drink in Yaowarat</h3>
+                            <p>Amidst the vibrant streets of Yaowarat lies a small drink shop known for its signature "Plum Mixed with Lemon Juice." This nostalgic spot offers a tangy-sweet escape, making it the perfect refreshment while exploring Chinatown's bustling charm.</p>
+                            <a href="journeys-and-joys/entries/entry2.html" class="btn">Explore</a>
+                        </div>
+                        <div class="journey-card">
+                            <h3>Thai Culinary Journey</h3>
+                            <p>Exploring the vibrant flavors and cultural significance of Thai cuisine, from street food adventures to traditional family recipes.</p>
+                            <a href="journeys-and-joys/entries/entry3.html" class="btn">Explore</a>
                         </div>
                         <div class="journey-card">
                             <h3>Island Paradise</h3>
                             <p>Discovering the hidden gems of Thailand's southern islands, from pristine beaches to local fishing communities and marine conservation efforts.</p>
-                            <a href="journeys-and-joys/entries/entry4.html" class="btn">Learn More</a>
+                            <a href="journeys-and-joys/entries/entry4.html" class="btn">Explore</a>
                         </div>
                         <div class="journey-card">
                             <h3>Mountain Retreats</h3>
                             <p>Exploring the serene mountains of Northern Thailand, experiencing hill tribe cultures, and finding peace in ancient temples.</p>
-                            <a href="journeys-and-joys/entries/entry5.html" class="btn">Learn More</a>
+                            <a href="journeys-and-joys/entries/entry5.html" class="btn">Explore</a>
                         </div>
                     </div>
                     <button class="scroll-arrow right" aria-label="Scroll right">
@@ -158,7 +416,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 Kittipong Kumthorncharoen. All rights reserved.</p>
+            <p>&copy; 2025 Kittipong Kumthorncharoen. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://github.com/TeeGitH/TeeGitH.github.io" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/kittipong-kumthorncharoen-3144b7332/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>

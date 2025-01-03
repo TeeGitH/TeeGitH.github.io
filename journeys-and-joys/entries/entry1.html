@@ -3,20 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box 1 - Journeys & Joys</title>
+    <title>Rural Thailand Tales - Journeys & Joys</title>
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .back-button {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 100;
+            transition: transform 0.3s ease;
         }
         
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
         .entry-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 60px auto 20px;
             padding: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Image gallery styles */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        .image-title {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .image-location {
+            font-size: 0.9em;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .image-location i {
+            font-size: 0.8em;
+        }
+
+        .image-description {
+            font-size: 0.95em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .gallery-item:hover .image-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+
+        .intro-text,
+        .closing-text {
+            margin-top: 60px;
+            padding: 30px;
+            background: linear-gradient(to right, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-color);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in forwards;
+            font-style: italic;
+        }
+
+        .intro-text {
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -24,16 +183,127 @@
     <a href="../../index.html#journeys" class="btn back-button">← Back</a>
     
     <div class="entry-content">
-        <h1>Thai Food</h1>
+        <h1>Rural Thailand Tales</h1>
         <div class="entry-body">
-            <p>Explore the rich and diverse flavors of Thai cuisine. Here are some popular dishes:</p>
-            <ol>
-                <li><strong>Pad Thai:</strong> A stir-fried noodle dish commonly served as street food in Thailand.</li>
-                <li><strong>Tom Yam Koong:</strong> A hot and sour Thai soup usually cooked with shrimp.</li>
-                <li><strong>Keaw Thod (Fried Wonton):</strong> Crispy fried wontons often served with a sweet and sour sauce.</li>
-                <li><strong>Tub Tim Kob Dessert:</strong> A refreshing dessert made with water chestnuts in coconut milk.</li>
-            </ol>
+            <div class="intro-text">
+                Beyond the bustling streets of Bangkok lies another Thailand - one of gentle rice fields, morning mists, and timeless traditions. This is where the heart of Thai culture continues to beat strongly, unchanged by the rapid pace of urban development.
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="../images/rural-thailand/image1.jpg" alt="Double P Home Cafe">
+                    <div class="image-overlay">
+                        <div class="image-title">Riverside Dining at Double P</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            135 Prasoet Suwan Rd, Suphan Buri
+                        </div>
+                        <div class="image-description">
+                            A peaceful lunch spot overlooking the river, where traditional Thai cuisine meets modern comfort. The perfect blend of local flavors and serene views.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/rural-thailand/image2.jpg" alt="Riverside View">
+                    <div class="image-overlay">
+                        <div class="image-title">Tranquil River Landscapes</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Bang Pla Ma, Suphan Buri
+                        </div>
+                        <div class="image-description">
+                            The lifeblood of rural Thailand, where rivers shape both the landscape and daily life. Watch as water plants dance with the gentle current.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/rural-thailand/image3.jpg" alt="Local Receipt">
+                    <div class="image-overlay">
+                        <div class="image-title">Local Flavors & Value</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Double P Home Cafe, Suphan Buri
+                        </div>
+                        <div class="image-description">
+                            Authentic Thai dining remains affordable and genuine, where every meal tells a story of local ingredients and traditional recipes.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/rural-thailand/image4.jpg" alt="Traditional Market">
+                    <div class="image-overlay">
+                        <div class="image-title">Nostalgic Market Charm</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Soi Thetsaban 2, Sam Chuk
+                        </div>
+                        <div class="image-description">
+                            Step into a time capsule where vintage goods and traditional snacks line the shelves, preserving the charm of old Thailand.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/rural-thailand/image5.jpg" alt="Market Walkway">
+                    <div class="image-overlay">
+                        <div class="image-title">Evening Market Life</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Sam Chuk Market, Suphan Buri
+                        </div>
+                        <div class="image-description">
+                            As day turns to dusk, the market comes alive with local vendors offering fresh produce and ready-to-eat delicacies.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/rural-thailand/image6.jpg" alt="Traditional Architecture">
+                    <div class="image-overlay">
+                        <div class="image-title">Heritage Architecture</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Yothathikan Road, Suphan Buri
+                        </div>
+                        <div class="image-description">
+                            Traditional Thai architecture stands proud, showcasing the timeless beauty of wooden structures and cultural preservation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="closing-text">
+                This charming town is just a 90-minute drive away, making it perfect for a weekend escape. December's cool weather and gentle breezes add to its allure. Here, time slows down—you can simply sit, unwind, and let the serene surroundings recharge your spirit.
+            </div>
         </div>
     </div>
+
+    <!-- Modal for full-size images -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Full size image">
+    </div>
+
+    <script>
+        // Image modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                modal.style.display = 'block';
+                modalImg.src = imgSrc;
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    </script>
 </body>
 </html> 

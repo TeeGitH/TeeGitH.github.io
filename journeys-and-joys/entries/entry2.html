@@ -3,20 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rural Thailand Tales - Journeys & Joys</title>
+    <title>A Drink Stop in Chinatown - Journeys & Joys</title>
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .back-button {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 100;
+            transition: transform 0.3s ease;
         }
         
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
         .entry-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 60px auto 20px;
             padding: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-text,
+        .closing-text {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(to right, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-color);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in forwards;
+            font-style: italic;
+        }
+
+        /* Enhanced Image gallery styles */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        .image-title {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .image-location {
+            font-size: 0.9em;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .image-location i {
+            font-size: 0.8em;
+        }
+
+        .image-description {
+            font-size: 0.95em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .gallery-item:hover .image-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+
+        /* Add new memory-quote style */
+        .memory-quote {
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(to right, rgba(255, 165, 0, 0.1), rgba(255, 165, 0, 0.05));
+            border-left: 4px solid #ffa500;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-color);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in forwards;
+            font-style: italic;
+            position: relative;
+        }
+
+        .memory-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 4em;
+            color: rgba(255, 165, 0, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        .memory-quote::after {
+            content: '"';
+            position: absolute;
+            bottom: -60px;
+            right: 20px;
+            font-size: 4em;
+            color: rgba(255, 165, 0, 0.2);
+            font-family: Georgia, serif;
         }
     </style>
 </head>
@@ -24,19 +215,105 @@
     <a href="../../index.html#journeys" class="btn back-button">← Back</a>
     
     <div class="entry-content">
-        <h1>City of Bangkok: A Vibrant Metropolis</h1>
+        <h1>A Drink Stop in Chinatown: Plum Lemon Delights</h1>
         <div class="entry-body">
-            <p>Welcome to Bangkok, where ancient traditions dance with modern energy. Thailand's capital is a mesmerizing blend of glittering temples, bustling markets, and soaring skyscrapers, creating an unforgettable urban symphony that captivates visitors from around the world.</p>
+            <div class="intro-text">
+                Tucked away in the bustling streets of Chinatown, this humble drink shop is a gem waiting to be discovered. The aroma of plum and lemon wafts through the air as you approach, and the cheerful red decor beckons you inside. Their signature drink, "Plum Mixed with Lemon Juice," is a perfect blend of tangy and sweet—a refreshing escape from the city's heat.
+            </div>
+
+            <div class="memory-quote">
+                I remember seeing a sign over 40 years ago, back when I was a kid, stating that this shop was already more than 50 years old. That means it must be around 90 years old now!
+            </div>
             
-            <h2>A City That Never Sleeps</h2>
-            <p>From dawn to dusk and beyond, Bangkok pulses with life. Start your day at a serene temple, spend afternoon exploring luxury malls, and end your evening at world-famous street food markets where the aromas of Thai cuisine fill the air.</p>
-            
-            <h2>Cultural Treasures</h2>
-            <p>Discover magnificent landmarks like the Grand Palace, Wat Phra Kaew, and Wat Arun. These architectural marvels showcase the city's rich heritage and spiritual significance, drawing millions of visitors each year with their stunning beauty.</p>
-            
-            <h2>Modern Conveniences</h2>
-            <p>Bangkok offers all the amenities of a world-class city. With its efficient BTS Skytrain, luxurious shopping centers, vibrant nightlife, and internationally acclaimed restaurants, the city perfectly balances Thai charm with contemporary comfort.</p>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="../images/yaowarat-drinks/image1.jpg" alt="Evening Shop Front">
+                    <div class="image-overlay">
+                        <div class="image-title">Evening Ambiance</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            541 Charoen Krung Rd, Bangkok
+                        </div>
+                        <div class="image-description">
+                            The shop comes alive in the evening, its warm lights inviting passersby to stop for a refreshing drink.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/yaowarat-drinks/image2.jpg" alt="Menu Display">
+                    <div class="image-overlay">
+                        <div class="image-title">Traditional Menu Board</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Yaowarat, Bangkok
+                        </div>
+                        <div class="image-description">
+                            Vintage menu boards in Thai and Chinese characters showcase the shop's heritage and signature drinks.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/yaowarat-drinks/image3.jpg" alt="Shop Location">
+                    <div class="image-overlay">
+                        <div class="image-title">Street View</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Charoen Krung Road
+                        </div>
+                        <div class="image-description">
+                            Located on the bustling Charoen Krung Road, the shop is easily accessible to both locals and visitors.
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/yaowarat-drinks/image4.jpg" alt="Signature Drinks">
+                    <div class="image-overlay">
+                        <div class="image-title">Signature Plum Lemon Drinks</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Yaowarat's Finest
+                        </div>
+                        <div class="image-description">
+                            The famous plum and lemon juice, available both bottled and freshly prepared in a refreshing slush.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="closing-text">
+                The shop feels like a step back in time, with vintage signs and a warm, nostalgic charm. Locals flock here not just for the drinks but also for a taste of tradition and a moment of serenity amidst the vibrant chaos of Yaowarat. Whether you opt for a bottled drink or a chilled slush, this tiny shop promises a memorable sip of Chinatown's heritage.
+            </div>
         </div>
     </div>
+
+    <!-- Modal for full-size images -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Full size image">
+    </div>
+
+    <script>
+        // Image modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                modal.style.display = 'block';
+                modalImg.src = imgSrc;
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    </script>
 </body>
 </html> 

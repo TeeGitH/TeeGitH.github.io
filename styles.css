@@ -55,10 +55,8 @@ header {
 
 nav .container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    text-align: center;
+    gap: 2rem;
 }
 
 nav h1 {
@@ -237,38 +235,17 @@ footer {
 /* Responsive styles */
 @media (max-width: 768px) {
     nav .container {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .nav-social-links {
+        order: 3;
+        margin: 1rem auto;
     }
 
     #nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--primary-color);
-        padding: 1rem;
-        text-align: center;
-        gap: 1rem;
-    }
-
-    #nav-links.show {
-        display: flex;
-    }
-
-    #menu-toggle {
-        display: block;
-    }
-
-    .about-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-image {
-        margin-bottom: 1rem;
+        order: 4;
+        width: 100%;
     }
 }
 
@@ -459,8 +436,7 @@ footer {
 
 /* Style the theme toggle button */
 .theme-toggle {
-    margin-left: auto;
-    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 #theme-toggle {
@@ -474,5 +450,22 @@ footer {
 }
 
 #theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Add these styles for the nav social links */
+.nav-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+.nav-social-links a {
+    color: var(--nav-text);
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-social-links a:hover {
     transform: scale(1.1);
 }

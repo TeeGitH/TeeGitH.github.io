@@ -406,15 +406,19 @@
             <div class="container">
                 <h2>Contact Me</h2>
                 <div id="contact-content" class="dynamic-content"></div>
-                <iframe 
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSdZjz7r4oU3SYwKmiCGPLj42s9QEwZBu6ao-MvoFg7Q_IfQtw/viewform?embedded=true"
-                    width="100%" 
-                    height="700px" 
-                    frameborder="0" 
-                    marginheight="0" 
-                    marginwidth="0">
-                    Loading…
-                </iframe>
+                <form id="contact-form" action="https://formspree.io/f/mlddobvw" method="POST">
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your contact" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Send</button>
+                </form>
+                <div class="sound-control">
+                    <label for="typing-volume">Typing Sound:</label>
+                    <input type="range" id="typing-volume" min="0" max="100" value="50">
+                </div>
             </div>
         </section>
     </main>
@@ -432,5 +436,19 @@
             <div id="markdown-content"></div>
         </div>
     </div>
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content confirmation">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Thank You!</h3>
+            <p>Your message has been sent successfully.</p>
+            <button class="confirm-btn">OK</button>
+        </div>
+    </div>
+    <audio id="typing-sound" preload="auto">
+        <source src="sounds/keyboard-click.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </body>
 </html>

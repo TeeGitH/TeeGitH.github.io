@@ -200,4 +200,124 @@ document.addEventListener('DOMContentLoaded', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         setTheme(!isDark);
     });
+
+    // Update the contact form submission handler
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = this;
+        const confirmationModal = document.getElementById('confirmation-modal');
+        
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show confirmation modal
+                confirmationModal.style.display = 'block';
+                form.reset();
+                
+                // Handle the OK button click
+                const confirmBtn = confirmationModal.querySelector('.confirm-btn');
+                confirmBtn.onclick = function() {
+                    confirmationModal.style.display = 'none';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                // Close modal when clicking outside
+                window.onclick = function(event) {
+                    if (event.target === confirmationModal) {
+                        confirmationModal.style.display = 'none';
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                };
+            } else {
+                throw new Error('Failed to send message');
+            }
+        })
+        .catch(error => {
+            alert('Error sending message. Please try again.');
+            console.error(error);
+        });
+    });
+
+    // Setup typing sound
+    const typingSound = document.getElementById('typing-sound');
+    const messageInput = document.getElementById('message');
+    const emailInput = document.getElementById('email');
+    let typingTimeout;
+
+    function playTypingSound() {
+        if (typingSound.paused) {
+            typingSound.currentTime = 0;
+            typingSound.play();
+        } else {
+            // If sound is already playing, restart it
+            typingSound.currentTime = 0;
+        }
+    }
+
+    function handleTyping(event) {
+        // Only play sound for actual typing keys and backspace/delete
+        const validKeys = [
+            'Backspace', 'Delete', 
+            ...Array.from('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?@#$%^&*()_+-=[]{}|;:\'"`~<>/\\')
+        ];
+        
+        if (validKeys.includes(event.key)) {
+            const sound = document.getElementById('typing-sound');
+            console.log('Key pressed:', event.key); // Debug log
+            
+            try {
+                sound.currentTime = 0;
+                sound.volume = document.getElementById('typing-volume').value / 100;
+                const playPromise = sound.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            console.log('Sound played successfully'); // Debug log
+                        })
+                        .catch(error => {
+                            console.error('Error playing sound:', error);
+                        });
+                }
+            } catch (error) {
+                console.error('Error with sound:', error);
+            }
+        }
+    }
+
+    function handleKeyUp() {
+        const sound = document.getElementById('typing-sound');
+        if (!sound.paused) {
+            sound.pause();
+            sound.currentTime = 0;
+            console.log('Sound stopped'); // Debug log
+        }
+    }
+
+    // Add event listeners for both keydown and keyup
+    document.getElementById('message').addEventListener('keydown', handleTyping);
+    document.getElementById('message').addEventListener('keyup', handleKeyUp);
+    document.getElementById('email').addEventListener('keydown', handleTyping);
+    document.getElementById('email').addEventListener('keyup', handleKeyUp);
+
+    // Add this to your JavaScript
+    document.getElementById('typing-volume').addEventListener('input', function(e) {
+        const volume = e.target.value / 100;
+        document.getElementById('typing-sound').volume = volume;
+    });
+
+    // Add this after your DOMContentLoaded event starts
+    const sound = document.getElementById('typing-sound');
+    sound.addEventListener('loadeddata', () => {
+        console.log('Sound file loaded successfully');
+    });
+    sound.addEventListener('error', (e) => {
+        console.error('Error loading sound file:', e);
+    });
 });

@@ -214,8 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Accept': 'application/json'
             }
         })
-        .then(response => {
-            if (response.ok) {
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
                 // Show confirmation modal
                 confirmationModal.style.display = 'block';
                 form.reset();
@@ -239,8 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
+            console.error('Error:', error);
             alert('Error sending message. Please try again.');
-            console.error(error);
         });
     });
 

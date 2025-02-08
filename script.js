@@ -331,6 +331,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const flashBuildLeftArrow = document.querySelector('#flash-build .scroll-arrow.left');
     const flashBuildRightArrow = document.querySelector('#flash-build .scroll-arrow.right');
     
+    // GitHub confirmation modal functionality
+    const githubModal = document.getElementById('github-confirm-modal');
+    const githubProceedBtn = document.getElementById('github-proceed-btn');
+    const githubCancelBtn = document.getElementById('github-cancel-btn');
+    let pendingGithubUrl = '';
+
+    // Handle GitHub link clicks
+    document.querySelector('.github-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        pendingGithubUrl = e.currentTarget.href;
+        githubModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Handle proceed to GitHub
+    githubProceedBtn.addEventListener('click', () => {
+        if (pendingGithubUrl) {
+            window.open(pendingGithubUrl, '_blank');
+        }
+        githubModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    // Handle cancel
+    githubCancelBtn.addEventListener('click', () => {
+        githubModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    // Close GitHub modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === githubModal) {
+            githubModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close GitHub modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && githubModal.style.display === 'block') {
+            githubModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
     // Since we currently only have one card, hide the arrows
     // You can remove these lines when you add more projects
     flashBuildLeftArrow.style.display = 'none';
@@ -348,6 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Initial arrow visibility check
+    updateFlashBuildArrows();
+
     // Add click handlers for arrows (will be useful when you add more projects)
     flashBuildLeftArrow.addEventListener('click', () => {
         // Implementation for showing previous project
@@ -359,13 +407,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial arrow visibility check
     updateFlashBuildArrows();
-
-    // Add this after the existing project card event listeners
-    const flashBuildDetailsBtn = document.querySelector('.flash-build-card .details-btn');
-    if (flashBuildDetailsBtn) {
-        flashBuildDetailsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            loadMarkdownContent('flash_builds/chatbot_aws/AWS.md');
-        });
-    }
 });

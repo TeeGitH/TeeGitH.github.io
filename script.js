@@ -31,29 +31,33 @@ document.addEventListener('DOMContentLoaded', () => {
     
     async function loadMarkdownContent(markdownFile) {
         try {
-            const response = await fetch(`project_docs/${markdownFile}`);
+            const response = await fetch(markdownFile);
+            if (!response.ok) {
+                throw new Error('Failed to load markdown content');
+            }
             const text = await response.text();
             markdownContent.innerHTML = marked.parse(text);
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         } catch (error) {
             console.error('Error loading markdown:', error);
+            alert('Failed to load content. Please try again.');
         }
     }
 
     wordGuessingGameLink.addEventListener('click', (e) => {
         e.preventDefault();
-        loadMarkdownContent('readme_word_guessing_game.md');
+        loadMarkdownContent('project_docs/readme_word_guessing_game.md');
     });
 
     llmTwinLink.addEventListener('click', (e) => {
         e.preventDefault();
-        loadMarkdownContent('Building_LLMs_Twins.md');
+        loadMarkdownContent('project_docs/Building_LLMs_Twins.md');
     });
 
     personaFineTuningLink.addEventListener('click', (e) => {
         e.preventDefault();
-        loadMarkdownContent('persona_AI_FineTuning.md');
+        loadMarkdownContent('project_docs/persona_AI_FineTuning.md');
     });
 
     // Close modal when clicking the close button
@@ -321,4 +325,47 @@ document.addEventListener('DOMContentLoaded', () => {
     sound.addEventListener('error', (e) => {
         console.error('Error loading sound file:', e);
     });
+
+    // Flash Build carousel functionality
+    const flashBuildCarousel = document.querySelector('.flash-build-carousel');
+    const flashBuildLeftArrow = document.querySelector('#flash-build .scroll-arrow.left');
+    const flashBuildRightArrow = document.querySelector('#flash-build .scroll-arrow.right');
+    
+    // Since we currently only have one card, hide the arrows
+    // You can remove these lines when you add more projects
+    flashBuildLeftArrow.style.display = 'none';
+    flashBuildRightArrow.style.display = 'none';
+
+    // This function will be useful when you add more projects
+    function updateFlashBuildArrows() {
+        const cards = flashBuildCarousel.querySelectorAll('.flash-build-card');
+        if (cards.length <= 1) {
+            flashBuildLeftArrow.style.display = 'none';
+            flashBuildRightArrow.style.display = 'none';
+        } else {
+            flashBuildLeftArrow.style.display = 'flex';
+            flashBuildRightArrow.style.display = 'flex';
+        }
+    }
+
+    // Add click handlers for arrows (will be useful when you add more projects)
+    flashBuildLeftArrow.addEventListener('click', () => {
+        // Implementation for showing previous project
+    });
+
+    flashBuildRightArrow.addEventListener('click', () => {
+        // Implementation for showing next project
+    });
+
+    // Initial arrow visibility check
+    updateFlashBuildArrows();
+
+    // Add this after the existing project card event listeners
+    const flashBuildDetailsBtn = document.querySelector('.flash-build-card .details-btn');
+    if (flashBuildDetailsBtn) {
+        flashBuildDetailsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadMarkdownContent('flash_builds/chatbot_aws/AWS.md');
+        });
+    }
 });

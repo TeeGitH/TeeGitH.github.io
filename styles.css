@@ -625,3 +625,147 @@ footer {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* Flash Build Section */
+#flash-build {
+    padding: 4rem 0;
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    text-align: center;
+}
+
+#flash-build h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+#flash-build .subtitle {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.flash-build-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.flash-build-carousel {
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+.flash-build-card {
+    background: var(--card-background);
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .flash-build-card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.flash-build-card:hover {
+    transform: translateY(-5px);
+}
+
+.flash-build-card h3 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.flash-build-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.flash-build-card:hover h3::after {
+    width: 100px;
+}
+
+.flash-build-card p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.flash-build-card .btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.flash-build-card .btn:hover {
+    background: #2980b9;
+    transform: translateX(5px);
+}
+
+/* Adjust the scroll arrows specifically for flash build */
+#flash-build .scroll-arrow {
+    background: var(--primary-color);
+    opacity: 0.8;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#flash-build .scroll-arrow:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+#flash-build .scroll-arrow.left {
+    left: 0;
+}
+
+#flash-build .scroll-arrow.right {
+    right: 0;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+    .flash-build-card {
+        padding: 1.5rem;
+    }
+
+    .flash-build-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .flash-build-card p {
+        font-size: 1rem;
+    }
+}

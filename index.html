@@ -261,6 +261,122 @@
         [data-theme="dark"] .featured-story:hover {
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
+
+        /* Enhanced Flash Build Card Styles */
+        .flash-build-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .flash-build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .tech-stack {
+            margin: 15px 0;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 5px;
+            background: linear-gradient(135deg, #4A00E0, #8E2DE2);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .project-image {
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .workflow-diagram {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-description {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .feature-list li {
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .github-btn, .details-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .github-btn {
+            background: #333;
+            color: white;
+        }
+
+        .github-btn:hover {
+            background: #24292e;
+            transform: translateY(-2px);
+        }
+
+        .details-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .details-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Dark mode styles */
+        [data-theme="dark"] .flash-build-card {
+            background: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .feature-list li {
+            color: #e0e0e0;
+        }
+
+        [data-theme="dark"] .tech-badge {
+            background: linear-gradient(135deg, #2d1b69, #4a1d96);
+        }
     </style>
 </head>
 <body>
@@ -336,6 +452,50 @@
                         <p>Bringing characters to life by fine-tuning LLM to create unique, persona-driven assistants.</p>
                         <a href="#" class="btn">Learn More</a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flash-build">
+            <div class="container text-center">
+                <h2>24-hrs Flash Build</h2>
+                <p class="subtitle">💡 Rapid Innovation in a Single Day 💡</p>
+                <div class="flash-build-container">
+                    <button class="scroll-arrow left" aria-label="Previous project">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="flash-build-carousel">
+                        <div class="flash-build-card">
+                            <h3>ChatBot w/ AWS & OpenAI</h3>
+                            <div class="tech-stack">
+                                <span class="tech-badge">AWS Lambda</span>
+                                <span class="tech-badge">API Gateway</span>
+                                <span class="tech-badge">OpenAI Assistant API</span>
+                            </div>
+                            <div class="project-image">
+                                <img src="flash_builds/chatbot_aws/AWS_OpenAI_workflow.jpg" alt="AWS OpenAI Chatbot Workflow" class="workflow-diagram">
+                            </div>
+                            <div class="project-description">
+                                <p>A serverless chatbot implementation using AWS Lambda and OpenAI's API, built and deployed in under 24 hours. Features include:</p>
+                                <ul class="feature-list">
+                                    <li>✅ Serverless Architecture</li>
+                                    <li>✅ OpenAI's LLM Integration</li>
+                                    <li>✅ Scalable Infrastructure</li>
+                                </ul>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/TeeGitH/ChatBot_AWS_OpenAI_Assistantv2" class="btn github-btn" target="_blank">
+                                    <i class="fab fa-github"></i> View on GitHub
+                                </a>
+                                <button class="btn details-btn">
+                                    <i class="fas fa-info-circle"></i> Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="scroll-arrow right" aria-label="Next project">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </section>

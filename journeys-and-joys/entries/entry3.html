@@ -3,20 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thai Culinary Journey - Journeys & Joys</title>
+    <title>Kanom Tokyo: Street Food Nostalgia - Journeys & Joys</title>
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .back-button {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 100;
+            transition: transform 0.3s ease;
         }
         
+        .back-button:hover {
+            transform: translateX(-5px);
+        }
+
         .entry-content {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 60px auto 20px;
             padding: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-text,
+        .closing-text {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(to right, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-color);
+            text-align: center;
+            animation: fadeIn 1.5s ease-in forwards;
+            font-style: italic;
+        }
+
+        /* Enhanced Image gallery styles */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        .image-title {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .image-location {
+            font-size: 0.9em;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .image-location i {
+            font-size: 0.8em;
+        }
+
+        .image-description {
+            font-size: 0.95em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .gallery-item:hover .image-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item img {
+                height: 300px;
+            }
+        }
+
+        /* Content sections */
+        .content-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(to right, rgba(255, 165, 0, 0.1), rgba(255, 165, 0, 0.05));
+            border-left: 4px solid #ffa500;
+            border-radius: 8px;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        .content-section h2 {
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-size: 1.5em;
         }
     </style>
 </head>
@@ -24,16 +196,77 @@
     <a href="../../index.html#journeys" class="btn back-button">← Back</a>
     
     <div class="entry-content">
-        <h1>Thai Food</h1>
+        <h1>ขนมโตเกียว: A Taste of Nostalgia on the Streets of Thailand</h1>
         <div class="entry-body">
-            <p>Explore the rich and diverse flavors of Thai cuisine. Here are some popular dishes:</p>
-            <ol>
-                <li><strong>Pad Thai:</strong> A stir-fried noodle dish commonly served as street food in Thailand.</li>
-                <li><strong>Tom Yam Koong:</strong> A hot and sour Thai soup usually cooked with shrimp.</li>
-                <li><strong>Keaw Thod (Fried Wonton):</strong> Crispy fried wontons often served with a sweet and sour sauce.</li>
-                <li><strong>Tub Tim Kob Dessert:</strong> A refreshing dessert made with water chestnuts in coconut milk.</li>
-            </ol>
+            <div class="intro-text">
+                If you walk through the bustling streets of Thailand, you might come across a humble street cart with a sizzling griddle, thin batter spreading across the hot surface, and the sweet aroma of vanilla and custard filling the air. This is ขนมโตเกียว (Kanom Tokyo), a beloved Thai street snack that has been enjoyed for generations.
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="../images/tokyo/tokyo_pancake.jpg" alt="Kanom Tokyo Street Cart">
+                    <div class="image-overlay">
+                        <div class="image-title">Traditional Kanom Tokyo Cart</div>
+                        <div class="image-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Street Food Market, Bangkok
+                        </div>
+                        <div class="image-description">
+                            A typical street vendor preparing fresh Kanom Tokyo, with the signature griddle and array of fillings on display.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>What is ขนมโตเกียว?</h2>
+                <p>Despite its name, Kanom Tokyo has no direct connection to Japan. It is a Thai creation, a thin and crispy pancake filled with various sweet or savory fillings. The classic versions include custard cream, sweet egg yolk, or sausages, but modern variations feature chocolate, taro, or even seafood fillings.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>The Art of Making Kanom Tokyo</h2>
+                <p>The process is simple yet mesmerizing. The vendor ladles a thin layer of batter onto a flat iron griddle, spreading it into an oval shape. Once it begins to set, the chosen filling—whether a crispy sausage or a creamy custard—is placed inside. The pancake is then carefully rolled or folded before being served hot and fresh.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>A Childhood Favorite</h2>
+                <p>For many Thais, Kanom Tokyo is a nostalgic treat from childhood, often sold in front of schools and markets. Its affordability and variety make it a go-to snack for kids and adults alike.</p>
+            </div>
+
+            <div class="closing-text">
+                Kanom Tokyo remains a street food staple, easily found at local markets, food stalls, and roadside vendors. Prices typically range from 10-20 baht per piece, depending on the filling. If you ever find yourself craving a quick and delightful snack, look for a Kanom Tokyo cart and enjoy the simple yet satisfying flavors of this Thai street food classic!
+            </div>
         </div>
     </div>
+
+    <!-- Modal for full-size images -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Full size image">
+    </div>
+
+    <script>
+        // Image modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.close-modal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                modal.style.display = 'block';
+                modalImg.src = imgSrc;
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    </script>
 </body>
 </html> 

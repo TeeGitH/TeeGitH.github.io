@@ -83,41 +83,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Journeys section scroll functionality
-    const journeysGrid = document.querySelector('.journeys-grid');
-    const leftArrow = document.querySelector('.scroll-arrow.left');
-    const rightArrow = document.querySelector('.scroll-arrow.right');
+    const journeysContainer = document.querySelector('#journeys .journeys-grid');
+    const journeysLeftArrow = document.querySelector('#journeys .scroll-arrow.left');
+    const journeysRightArrow = document.querySelector('#journeys .scroll-arrow.right');
 
     // Scroll amount for each arrow click (adjust as needed)
     const scrollAmount = 300;
 
-    // Update arrow visibility
-    function updateArrowVisibility() {
-        leftArrow.classList.toggle('hidden', journeysGrid.scrollLeft <= 0);
-        rightArrow.classList.toggle('hidden', 
-            journeysGrid.scrollLeft + journeysGrid.clientWidth >= journeysGrid.scrollWidth);
+    // Update arrow visibility for Journeys section
+    function updateJourneysArrowVisibility() {
+        journeysLeftArrow.classList.toggle('hidden', journeysContainer.scrollLeft <= 0);
+        journeysRightArrow.classList.toggle('hidden', 
+            journeysContainer.scrollLeft + journeysContainer.clientWidth >= journeysContainer.scrollWidth);
     }
 
-    // Add click handlers for arrows
-    leftArrow.addEventListener('click', () => {
-        journeysGrid.scrollBy({
+    // Add click handlers for Journeys arrows
+    journeysLeftArrow.addEventListener('click', () => {
+        journeysContainer.scrollBy({
             left: -scrollAmount,
             behavior: 'smooth'
         });
     });
 
-    rightArrow.addEventListener('click', () => {
-        journeysGrid.scrollBy({
+    journeysRightArrow.addEventListener('click', () => {
+        journeysContainer.scrollBy({
             left: scrollAmount,
             behavior: 'smooth'
         });
     });
 
-    // Update arrow visibility on scroll and resize
-    journeysGrid.addEventListener('scroll', updateArrowVisibility);
-    window.addEventListener('resize', updateArrowVisibility);
+    // Update Journeys arrow visibility on scroll and resize
+    journeysContainer.addEventListener('scroll', updateJourneysArrowVisibility);
+    window.addEventListener('resize', updateJourneysArrowVisibility);
 
-    // Initial arrow visibility check
-    updateArrowVisibility();
+    // Initial Journeys arrow visibility check
+    updateJourneysArrowVisibility();
 
     // Function to get URL parameters
     function getUrlParameter(name) {
@@ -331,11 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const flashBuildLeftArrow = document.querySelector('#flash-build .scroll-arrow.left');
     const flashBuildRightArrow = document.querySelector('#flash-build .scroll-arrow.right');
     
-    // Since we currently only have one card, hide the arrows
-    flashBuildLeftArrow.style.display = 'none';
-    flashBuildRightArrow.style.display = 'none';
-
-    // This function will be useful when you add more projects
+    // Update arrow visibility for Flash Build section
     function updateFlashBuildArrows() {
         const cards = flashBuildCarousel.querySelectorAll('.flash-build-card');
         if (cards.length <= 1) {
@@ -344,21 +340,33 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             flashBuildLeftArrow.style.display = 'flex';
             flashBuildRightArrow.style.display = 'flex';
+            
+            // Update arrow visibility based on scroll position
+            flashBuildLeftArrow.classList.toggle('hidden', flashBuildCarousel.scrollLeft <= 0);
+            flashBuildRightArrow.classList.toggle('hidden', 
+                flashBuildCarousel.scrollLeft + flashBuildCarousel.clientWidth >= flashBuildCarousel.scrollWidth);
         }
     }
 
-    // Initial arrow visibility check
-    updateFlashBuildArrows();
-
-    // Add click handlers for arrows (will be useful when you add more projects)
+    // Add click handlers for Flash Build arrows
     flashBuildLeftArrow.addEventListener('click', () => {
-        // Implementation for showing previous project
+        flashBuildCarousel.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
     });
 
     flashBuildRightArrow.addEventListener('click', () => {
-        // Implementation for showing next project
+        flashBuildCarousel.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
     });
 
-    // Initial arrow visibility check
+    // Update Flash Build arrow visibility on scroll and resize
+    flashBuildCarousel.addEventListener('scroll', updateFlashBuildArrows);
+    window.addEventListener('resize', updateFlashBuildArrows);
+
+    // Initial Flash Build arrow visibility check
     updateFlashBuildArrows();
 });

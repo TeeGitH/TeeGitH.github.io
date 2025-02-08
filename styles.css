@@ -654,16 +654,35 @@ footer {
 }
 
 .flash-build-carousel {
-    overflow: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    display: flex;
+    gap: 2rem;
     padding: 2rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #ddd;
+}
+
+.flash-build-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.flash-build-carousel::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.flash-build-carousel::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
 }
 
 .flash-build-card {
+    flex: 0 0 100%;
     background: var(--card-background);
     border-radius: 15px;
     padding: 2.5rem;
     margin: 0 auto;
-    max-width: 600px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;

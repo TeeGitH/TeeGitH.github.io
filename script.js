@@ -331,53 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const flashBuildLeftArrow = document.querySelector('#flash-build .scroll-arrow.left');
     const flashBuildRightArrow = document.querySelector('#flash-build .scroll-arrow.right');
     
-    // GitHub confirmation modal functionality
-    const githubModal = document.getElementById('github-confirm-modal');
-    const githubProceedBtn = document.getElementById('github-proceed-btn');
-    const githubCancelBtn = document.getElementById('github-cancel-btn');
-    let pendingGithubUrl = '';
-
-    // Handle GitHub link clicks
-    document.querySelector('.github-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        pendingGithubUrl = e.currentTarget.href;
-        githubModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
-
-    // Handle proceed to GitHub
-    githubProceedBtn.addEventListener('click', () => {
-        if (pendingGithubUrl) {
-            window.open(pendingGithubUrl, '_blank');
-        }
-        githubModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-
-    // Handle cancel
-    githubCancelBtn.addEventListener('click', () => {
-        githubModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    });
-
-    // Close GitHub modal when clicking outside
-    window.addEventListener('click', (e) => {
-        if (e.target === githubModal) {
-            githubModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Close GitHub modal with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && githubModal.style.display === 'block') {
-            githubModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
-    
     // Since we currently only have one card, hide the arrows
-    // You can remove these lines when you add more projects
     flashBuildLeftArrow.style.display = 'none';
     flashBuildRightArrow.style.display = 'none';
 

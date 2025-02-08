@@ -636,6 +636,7 @@ footer {
 #flash-build h2 {
     text-align: center;
     margin-bottom: 0.5rem;
+    color: var(--text-color);
 }
 
 #flash-build .subtitle {
@@ -644,6 +645,11 @@ footer {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     display: block;
+}
+
+[data-theme="dark"] #flash-build h2,
+[data-theme="dark"] #flash-build .subtitle {
+    color: #000000;
 }
 
 .flash-build-container {
@@ -787,4 +793,36 @@ footer {
     .flash-build-card p {
         font-size: 1rem;
     }
+}
+
+.github-btn {
+    background: linear-gradient(135deg, #6e5494, #24292e);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.github-btn:hover {
+    background: linear-gradient(135deg, #8a69b3, #2b3137);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .github-btn {
+    background: linear-gradient(135deg, #8867b0, #3a3f42);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .github-btn:hover {
+    background: linear-gradient(135deg, #9a78c3, #444a4e);
+    border-color: rgba(255, 255, 255, 0.35);
 }

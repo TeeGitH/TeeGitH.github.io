@@ -369,4 +369,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Flash Build arrow visibility check
     updateFlashBuildArrows();
+
+    // Video carousel functionality
+    const videoCarousel = document.querySelector('.video-carousel');
+    const videoLeftArrow = document.querySelector('#favorite-videos .scroll-arrow.left');
+    const videoRightArrow = document.querySelector('#favorite-videos .scroll-arrow.right');
+    
+    // Update arrow visibility for Video section
+    function updateVideoArrows() {
+        const cards = videoCarousel.querySelectorAll('.video-card');
+        if (cards.length <= 1) {
+            videoLeftArrow.style.display = 'none';
+            videoRightArrow.style.display = 'none';
+        } else {
+            videoLeftArrow.style.display = 'flex';
+            videoRightArrow.style.display = 'flex';
+            
+            videoLeftArrow.classList.toggle('hidden', videoCarousel.scrollLeft <= 0);
+            videoRightArrow.classList.toggle('hidden', 
+                videoCarousel.scrollLeft + videoCarousel.clientWidth >= videoCarousel.scrollWidth);
+        }
+    }
+
+    // Add click handlers for Video arrows
+    videoLeftArrow.addEventListener('click', () => {
+        videoCarousel.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    videoRightArrow.addEventListener('click', () => {
+        videoCarousel.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+
+    // Update Video arrow visibility on scroll and resize
+    videoCarousel.addEventListener('scroll', updateVideoArrows);
+    window.addEventListener('resize', updateVideoArrows);
+
+    // Initial Video arrow visibility check
+    updateVideoArrows();
 });

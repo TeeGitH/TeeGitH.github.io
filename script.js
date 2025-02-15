@@ -2,20 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Custom cursor functionality
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorCircle = document.querySelector('.cursor-circle');
-
+    
     window.addEventListener('mousemove', (e) => {
         requestAnimationFrame(() => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-            
-            // Position both elements together
-            const dotX = posX - 2.5;
-            const dotY = posY - 2.5;
-            const circleX = posX - 12.5;
-            const circleY = posY - 12.5;
-
-            cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
-            cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0)`;
+            // Update main cursor
+            cursorDot.style.transform = `translate3d(${e.clientX - 2.5}px, ${e.clientY - 2.5}px, 0)`;
+            cursorCircle.style.transform = `translate3d(${e.clientX - 12.5}px, ${e.clientY - 12.5}px, 0)`;
         });
     });
 

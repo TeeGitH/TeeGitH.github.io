@@ -1175,7 +1175,6 @@ a, button, input[type="submit"], .btn, .scroll-arrow, .journey-card, .project-ca
     height: 50px;
     background: var(--cursor-gradient);
     opacity: 1;
-    mix-blend-mode: normal;
 }
 
 /* Hide cursor on mobile devices */

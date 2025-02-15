@@ -1,4 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Custom cursor functionality
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorCircle = document.querySelector('.cursor-circle');
+
+    window.addEventListener('mousemove', (e) => {
+        requestAnimationFrame(() => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            // Position both elements together
+            const dotX = posX - 2.5;
+            const dotY = posY - 2.5;
+            const circleX = posX - 12.5;
+            const circleY = posY - 12.5;
+
+            cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+            cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0)`;
+        });
+    });
+
+    // Add hover effect to all clickable elements
+    const clickableElements = document.querySelectorAll('a, button, input[type="submit"], .btn, .scroll-arrow, .journey-card, .project-card, .blog-card, .flash-build-card');
+    
+    clickableElements.forEach(element => {
+        element.addEventListener('mouseenter', (e) => {
+            cursorCircle.classList.add('hover');
+            const circleX = e.clientX - 25;
+            const circleY = e.clientY - 25;
+            cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0)`;
+        });
+        
+        element.addEventListener('mouseleave', (e) => {
+            cursorCircle.classList.remove('hover');
+            const circleX = e.clientX - 12.5;
+            const circleY = e.clientY - 12.5;
+            cursorCircle.style.transform = `translate3d(${circleX}px, ${circleY}px, 0)`;
+        });
+    });
+
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
     const themeToggle = document.getElementById('theme-toggle');

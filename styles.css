@@ -11,6 +11,8 @@
     --modal-background: #fefefe;
     --modal-text: #333;
     --border-color: #ddd;
+    --cursor-color: rgba(255, 140, 0, 0.8);
+    --cursor-gradient: linear-gradient(135deg, #ff8c00, #ff4500);
 }
 
 /* Dark mode variables */
@@ -25,6 +27,8 @@
     --modal-background: #2d2d2d;
     --modal-text: #e0e0e0;
     --border-color: #404040;
+    --cursor-color: rgba(255, 165, 0, 0.9);
+    --cursor-gradient: linear-gradient(135deg, #ffa500, #ff6b00);
 }
 
 * {
@@ -38,6 +42,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
+    cursor: none;
 }
 
 .container {
@@ -1133,5 +1138,53 @@ footer {
     [data-theme="dark"] .journey-card {
         background: var(--card-background);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Custom cursor styles */
+a, button, input[type="submit"], .btn, .scroll-arrow, .journey-card, .project-card, .blog-card, .flash-build-card {
+    cursor: none;
+}
+
+.cursor-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--cursor-gradient);
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0s;
+}
+
+.cursor-circle {
+    width: 25px;
+    height: 25px;
+    background: var(--cursor-gradient);
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: width 0.3s ease, height 0.3s ease;
+    transform-origin: center;
+    opacity: 0.8;
+}
+
+.cursor-circle.hover {
+    width: 50px;
+    height: 50px;
+    background: var(--cursor-gradient);
+    opacity: 1;
+    mix-blend-mode: normal;
+}
+
+/* Hide cursor on mobile devices */
+@media (max-width: 768px) {
+    .cursor-dot, .cursor-circle {
+        display: none;
+    }
+    
+    body, a, button, input[type="submit"], .btn {
+        cursor: auto;
     }
 }

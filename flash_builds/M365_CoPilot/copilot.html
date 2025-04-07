@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Microsoft CoPilot - Flash Build</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset cursor styles */
+        body {
+            cursor: default;
+        }
+
+        /* Interactive elements cursor styles */
+        a, 
+        button, 
+        [role="button"],
+        .clickable,
+        .back-button,
+        .video-container {
+            cursor: pointer;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px);
+            background: #2980b9;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 60px auto 20px;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 40px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .description {
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(to right, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 30px;
+        }
+
+        [data-theme="dark"] .description {
+            background: linear-gradient(to right, rgba(52, 152, 219, 0.2), rgba(52, 152, 219, 0.1));
+        }
+
+        /* Ensure links in description are visibly interactive */
+        .description a {
+            color: var(--primary-color);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .description a:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html#flash-build" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to Flash Builds
+    </a>
+
+    <div class="content">
+        <h1>Learn Microsoft CoPilot in Microsoft 365</h1>
+        
+        <div class="description">
+            <p>Discover how to leverage the power of AI with Microsoft CoPilot across the Microsoft 365 suite. This 10-minute tutorial covers essential features and practical applications in Word, PowerPoint, Excel, and OneDrive.</p>
+        </div>
+
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/S78Dtc7JE0o" 
+                title="Learn Microsoft CoPilot in Word, PowerPoint, Excel and OneDrive" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="description">
+            <h2>Key Features Covered:</h2>
+            <ul>
+                <li>Word: AI-powered writing assistance and document creation</li>
+                <li>PowerPoint: Automated slide generation and design suggestions</li>
+                <li>Excel: Data analysis and formula recommendations</li>
+                <li>OneDrive: Use AI to read your documents</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

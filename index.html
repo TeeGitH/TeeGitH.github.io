@@ -266,20 +266,79 @@
         }
 
         /* Enhanced Flash Build Card Styles */
+        .flash-build-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .flash-build-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        .flash-build-carousel::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
         .flash-build-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 20px;
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            margin: 20px 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .flash-build-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-arrow.left {
+            left: 10px;
+        }
+
+        .scroll-arrow.right {
+            right: 10px;
+        }
+
+        .scroll-arrow:hover {
+            background: white;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-arrow.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        [data-theme="dark"] .scroll-arrow {
+            background: rgba(40, 40, 40, 0.9);
+            color: white;
+        }
+
+        [data-theme="dark"] .scroll-arrow:hover {
+            background: rgb(50, 50, 50);
         }
 
         .tech-stack {
@@ -493,6 +552,31 @@
                             <div class="project-links">
                                 <a href="https://github.com/TeeGitH/ChatBot_AWS_OpenAI_Assistantv2" class="btn github-btn" target="_blank">
                                     <i class="fab fa-github"></i> View on GitHub
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flash-build-card">
+                            <h3>Learn Microsoft CoPilot</h3>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Microsoft 365</span>
+                                <span class="tech-badge">AI Assistant</span>
+                                <span class="tech-badge">Productivity</span>
+                            </div>
+                            <div class="project-image">
+                                <img src="flash_builds/M365_CoPilot/M365_CoPilot.jpeg" alt="Microsoft CoPilot Overview" class="workflow-diagram">
+                            </div>
+                            <div class="project-description">
+                                <p>A 10-minute guide to using Microsoft CoPilot across Word, PowerPoint, Excel and OneDrive, showcasing AI-powered productivity features.</p>
+                                <ul class="feature-list">
+                                    <li>✅ Word: AI Document Generation</li>
+                                    <li>✅ PowerPoint: AI Presentation Enhancement</li>
+                                    <li>✅ Excel: AI Data Analysis</li>
+                                    <li>✅ OneDrive: AI Document Reader</li>
+                                </ul>
+                            </div>
+                            <div class="project-links">
+                                <a href="flash_builds/M365_CoPilot/copilot.html" class="btn details-btn">
+                                    <i class="fas fa-play-circle"></i> Watch Tutorial
                                 </a>
                             </div>
                         </div>

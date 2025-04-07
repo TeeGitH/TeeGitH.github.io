@@ -150,6 +150,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial Journeys arrow visibility check
     updateJourneysArrowVisibility();
 
+    // Flash Build carousel functionality
+    const flashBuildCarousel = document.querySelector('.flash-build-carousel');
+    const flashBuildLeftArrow = document.querySelector('#flash-build .scroll-arrow.left');
+    const flashBuildRightArrow = document.querySelector('#flash-build .scroll-arrow.right');
+
+    // Update arrow visibility for Flash Build section
+    function updateFlashBuildArrowVisibility() {
+        flashBuildLeftArrow.classList.toggle('hidden', flashBuildCarousel.scrollLeft <= 0);
+        flashBuildRightArrow.classList.toggle('hidden', 
+            flashBuildCarousel.scrollLeft + flashBuildCarousel.clientWidth >= flashBuildCarousel.scrollWidth);
+    }
+
+    // Add click handlers for Flash Build arrows
+    flashBuildLeftArrow.addEventListener('click', () => {
+        flashBuildCarousel.scrollBy({
+            left: -flashBuildCarousel.offsetWidth,
+            behavior: 'smooth'
+        });
+    });
+
+    flashBuildRightArrow.addEventListener('click', () => {
+        flashBuildCarousel.scrollBy({
+            left: flashBuildCarousel.offsetWidth,
+            behavior: 'smooth'
+        });
+    });
+
+    // Update Flash Build arrow visibility on scroll and resize
+    flashBuildCarousel.addEventListener('scroll', updateFlashBuildArrowVisibility);
+    window.addEventListener('resize', updateFlashBuildArrowVisibility);
+
+    // Initial Flash Build arrow visibility check
+    updateFlashBuildArrowVisibility();
+
     // Function to get URL parameters
     function getUrlParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -356,50 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sound.addEventListener('error', (e) => {
         console.error('Error loading sound file:', e);
     });
-
-    // Flash Build carousel functionality
-    const flashBuildCarousel = document.querySelector('.flash-build-carousel');
-    const flashBuildLeftArrow = document.querySelector('#flash-build .scroll-arrow.left');
-    const flashBuildRightArrow = document.querySelector('#flash-build .scroll-arrow.right');
-    
-    // Update arrow visibility for Flash Build section
-    function updateFlashBuildArrows() {
-        const cards = flashBuildCarousel.querySelectorAll('.flash-build-card');
-        if (cards.length <= 1) {
-            flashBuildLeftArrow.style.display = 'none';
-            flashBuildRightArrow.style.display = 'none';
-        } else {
-            flashBuildLeftArrow.style.display = 'flex';
-            flashBuildRightArrow.style.display = 'flex';
-            
-            // Update arrow visibility based on scroll position
-            flashBuildLeftArrow.classList.toggle('hidden', flashBuildCarousel.scrollLeft <= 0);
-            flashBuildRightArrow.classList.toggle('hidden', 
-                flashBuildCarousel.scrollLeft + flashBuildCarousel.clientWidth >= flashBuildCarousel.scrollWidth);
-        }
-    }
-
-    // Add click handlers for Flash Build arrows
-    flashBuildLeftArrow.addEventListener('click', () => {
-        flashBuildCarousel.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-
-    flashBuildRightArrow.addEventListener('click', () => {
-        flashBuildCarousel.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-
-    // Update Flash Build arrow visibility on scroll and resize
-    flashBuildCarousel.addEventListener('scroll', updateFlashBuildArrows);
-    window.addEventListener('resize', updateFlashBuildArrows);
-
-    // Initial Flash Build arrow visibility check
-    updateFlashBuildArrows();
 
     // Video carousel functionality
     const videoCarousel = document.querySelector('.video-carousel');

@@ -393,44 +393,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Video carousel functionality
     const videoCarousel = document.querySelector('.video-carousel');
-    const videoLeftArrow = document.querySelector('#favorite-videos .scroll-arrow.left');
-    const videoRightArrow = document.querySelector('#favorite-videos .scroll-arrow.right');
+    const videoLeftArrow = document.querySelector('#favorite-videos .video-arrow.left');
+    const videoRightArrow = document.querySelector('#favorite-videos .video-arrow.right');
+    const videoCards = videoCarousel.querySelectorAll('.video-card');
+    let currentVideoIndex = 0;
     
     // Update arrow visibility for Video section
     function updateVideoArrows() {
-        const cards = videoCarousel.querySelectorAll('.video-card');
-        if (cards.length <= 1) {
-            videoLeftArrow.style.display = 'none';
-            videoRightArrow.style.display = 'none';
-        } else {
-            videoLeftArrow.style.display = 'flex';
-            videoRightArrow.style.display = 'flex';
-            
-            videoLeftArrow.classList.toggle('hidden', videoCarousel.scrollLeft <= 0);
-            videoRightArrow.classList.toggle('hidden', 
-                videoCarousel.scrollLeft + videoCarousel.clientWidth >= videoCarousel.scrollWidth);
+        videoLeftArrow.style.display = currentVideoIndex === 0 ? 'none' : 'flex';
+        videoRightArrow.style.display = currentVideoIndex >= videoCards.length - 1 ? 'none' : 'flex';
+    }
+
+    // Scroll to specific video
+    function scrollToVideo(index) {
+        if (index >= 0 && index < videoCards.length) {
+            currentVideoIndex = index;
+            const cardWidth = videoCarousel.offsetWidth;
+            videoCarousel.scrollTo({
+                left: cardWidth * index,
+                behavior: 'smooth'
+            });
+            updateVideoArrows();
         }
     }
 
     // Add click handlers for Video arrows
     videoLeftArrow.addEventListener('click', () => {
-        videoCarousel.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
-        });
+        scrollToVideo(currentVideoIndex - 1);
     });
 
     videoRightArrow.addEventListener('click', () => {
-        videoCarousel.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
+        scrollToVideo(currentVideoIndex + 1);
     });
 
-    // Update Video arrow visibility on scroll and resize
-    videoCarousel.addEventListener('scroll', updateVideoArrows);
-    window.addEventListener('resize', updateVideoArrows);
+    // Handle manual scrolling
+    videoCarousel.addEventListener('scroll', () => {
+        const cardWidth = videoCarousel.offsetWidth;
+        currentVideoIndex = Math.round(videoCarousel.scrollLeft / cardWidth);
+        updateVideoArrows();
+    });
 
-    // Initial Video arrow visibility check
+    // Update on window resize
+    window.addEventListener('resize', () => {
+        scrollToVideo(currentVideoIndex);
+    });
+
+    // Initial setup
     updateVideoArrows();
 });
